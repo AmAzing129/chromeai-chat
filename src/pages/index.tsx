@@ -1,15 +1,20 @@
-import yayJpg from '../assets/yay.jpg';
+import { ProChat } from '@ant-design/pro-chat';
 
-export default function HomePage() {
+import { useTheme } from 'antd-style';
+
+export default () => {
+  const theme = useTheme();
   return (
-    <div>
-      <h2>Yay! Welcome to umi!</h2>
-      <p>
-        <img src={yayJpg} width="388" />
-      </p>
-      <p>
-        To get started, edit <code>pages/index.tsx</code> and save to reload.
-      </p>
+    <div style={{ background: theme.colorBgLayout }}>
+      <ProChat
+        helloMessage={
+          '欢迎使用 ProChat ，我是你的专属机器人，这是我们的 Github：[ProChat](https://github.com/ant-design/pro-chat)'
+        }
+        request={async (messages) => {
+          const mockedData: string = `这是一段模拟的对话数据。本次会话传入了${messages.length}条消息`;
+          return new Response(mockedData);
+        }}
+      />
     </div>
   );
-}
+};
